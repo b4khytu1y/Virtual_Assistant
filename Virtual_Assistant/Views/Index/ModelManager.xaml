@@ -1,0 +1,116 @@
+﻿<UserControl x:Class="Virtual_Assistant.Views.Index.ModelManager"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Virtual_Assistant.Views.Index"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" Loaded="ModelManagerLoaded" HorizontalAlignment="Stretch"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}"
+             d:DesignHeight="800" d:DesignWidth="300">
+    <Grid Background="{DynamicResource Background}">
+        <DockPanel Margin="7" VerticalAlignment="Stretch" HorizontalAlignment="Center">
+            <Grid DockPanel.Dock="Bottom" VerticalAlignment="Bottom">
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <Button Click="CancelClicked" Margin="0,0,7,0" BorderThickness="0"
+                            Background="{DynamicResource BackgroundLight}">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock Padding="0" Margin="0" VerticalAlignment="Center">Cancel</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Background="{DynamicResource Purple}" BorderThickness="0" Click="ModelSave">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <materialDesign:PackIcon VerticalAlignment="Center" Margin="0,0,7,0" Kind="FloppyDisk"></materialDesign:PackIcon>
+                            <TextBlock Padding="0" Margin="0" VerticalAlignment="Center">Save</TextBlock>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Grid>
+            <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Margin="0,0,0,15">
+                            <TextBlock FontSize="24">
+                                <materialDesign:PackIcon Kind="GlobeModel"></materialDesign:PackIcon>
+                                <Run>Manage Models</Run>
+                            </TextBlock>
+                            <StackPanel Orientation="Vertical" Margin="0,0,0,15">
+                                <TextBlock FontWeight="Black">
+                                    <materialDesign:PackIcon Kind="Signature"></materialDesign:PackIcon>
+                                    <Run Text="character.ai Token"></Run>
+                                </TextBlock>
+                                <TextBlock Margin="0,0,0,7" Text="You character.ai token"></TextBlock>
+                                <PasswordBox
+                                    Name="CharacterAiTokenField"
+                                    materialDesign:HintAssist.Hint="character ai token"
+                                    Padding="7"
+                                    materialDesign:HintAssist.IsFloating="False"
+                                    Style="{StaticResource MaterialDesignOutlinedPasswordBox}">
+                                </PasswordBox>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Vertical" Margin="0,0,0,15">
+                                <TextBlock FontWeight="Black">
+                                    <materialDesign:PackIcon Kind="VoiceChat"></materialDesign:PackIcon>
+                                    <Run Text="Elevenlabs Token"></Run>
+                                </TextBlock>
+                                <TextBlock Margin="0,0,0,7" Text="You Elevenlabs token for the API key"></TextBlock>
+                                <PasswordBox
+                                    Name="ElevenlabsTokenField"
+                                    materialDesign:HintAssist.Hint="elevenlabs token"
+                                    Padding="7"
+                                    materialDesign:HintAssist.IsFloating="False"
+                                    Style="{StaticResource MaterialDesignOutlinedPasswordBox}">
+                                </PasswordBox>
+                            </StackPanel>
+
+                            <StackPanel Margin="0,0,0,15" Orientation="Vertical" Name="CustomModelOptions">
+                                <TextBlock Margin="0,0,0,7" Text="Set your preferred model."></TextBlock>
+
+                                <ComboBox Margin="0,0,0,15" ItemsSource="{Binding ModelNames}" Name="ModelsList"
+                                          Padding="5" SelectedIndex="0"
+                                          Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                                </ComboBox>
+                                <Button Click="OpenModelsFolder" BorderThickness="0"
+                                        Background="{DynamicResource Purple}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="Folder" VerticalAlignment="Center"
+                                                                 Margin="0,0,7,0">
+                                        </materialDesign:PackIcon>
+                                        <TextBlock VerticalAlignment="Center" Text="Open Models Folder"></TextBlock>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Name="CustomWhisperModelOptions">
+                                <TextBlock FontWeight="Black">
+                                    <materialDesign:PackIcon Kind="VoiceChat"></materialDesign:PackIcon>
+                                    <Run Text="Whisper model"></Run>
+                                </TextBlock>
+                                <TextBlock Margin="0,0,0,7"
+                                           Text="Set your preferred Whisper model for audio transcription.">
+                                </TextBlock>
+
+                                <ComboBox Margin="0,0,0,15" ItemsSource="{Binding WhisperAvailableModels}"
+                                          Name="WhisperModelList" SelectionChanged="SelectionChanged"
+                                          Padding="5" SelectedIndex="0"
+                                          Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                                </ComboBox>
+                                <Button Click="DownloadWhisperModel" BorderThickness="0"
+                                        Background="{DynamicResource Purple}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="GlobeModel" VerticalAlignment="Center"
+                                                                 Margin="0,0,7,0">
+                                        </materialDesign:PackIcon>
+                                        <TextBlock Name="WhisperDownloadButton" VerticalAlignment="Center"
+                                                   Text="Download Model">
+                                        </TextBlock>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </DockPanel>
+    </Grid>
+</UserControl>

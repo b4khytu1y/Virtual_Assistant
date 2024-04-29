@@ -1,0 +1,122 @@
+﻿<UserControl x:Class="Virtual_Assistant.Views.Index.MainArea"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Virtual_Assistant.Views.Index"
+             xmlns:shared="clr-namespace:Virtual_Assistant.Views.Shared"
+             xmlns:cachedImage="clr-namespace:CachedImage;assembly=CachedImage"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d"
+             Loaded="MainAreaLoaded"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <!-- Define the ContextMenu -->
+        <ContextMenu x:Key="AddCharacterContextMenu" Background="{DynamicResource BackgroundLight}">
+            <MenuItem Click="NewCharacterAi">
+                <MenuItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <Border CornerRadius="7" Background="Transparent" Margin="0,0,8,0">
+                            <Border.OpacityMask>
+                                <VisualBrush>
+                                    <VisualBrush.Visual>
+                                        <Border
+                                            Background="Black"
+                                            SnapsToDevicePixels="True"
+                                            CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource AncestorType=Border}}"
+                                            Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Border}}"
+                                            Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Border}}" />
+                                    </VisualBrush.Visual>
+                                </VisualBrush>
+                            </Border.OpacityMask>
+                            <cachedImage:Image VerticalAlignment="Stretch" Stretch="UniformToFill"
+                                               HorizontalAlignment="Stretch"
+                                               ImageUrl="https://pbs.twimg.com/profile_images/1638842319104516097/TketN7Pm_400x400.jpg">
+                            </cachedImage:Image>
+                        </Border>
+                        <TextBlock Text="character.ai"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center">
+                        </TextBlock>
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+            <MenuItem Click="NewLocalCharacter">
+                <MenuItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Local Character"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center">
+                        </TextBlock>
+                    </StackPanel>
+                </MenuItem.Header>
+            </MenuItem>
+            <!-- Add more menu items as needed -->
+        </ContextMenu>
+    </UserControl.Resources>
+    <Grid>
+        <DockPanel>
+            <Border BorderThickness="0,0,2,0" BorderBrush="{DynamicResource Subtle}">
+                <DockPanel DockPanel.Dock="Left"
+                           Background="{DynamicResource BackgroundLight}">
+                    <Grid DockPanel.Dock="Bottom" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+                        <Border Cursor="Hand" CornerRadius="7" Margin="5" VerticalAlignment="Center" Height="40"
+                                Background="{DynamicResource Background}"
+                                ToolTipService.InitialShowDelay="0" MouseDown="NewCharacter"
+                                HorizontalAlignment="Stretch">
+                            <Border.ToolTip>
+                                <ToolTip Style="{DynamicResource MaterialDesignToolTip}" Content="Add Character"></ToolTip>
+                            </Border.ToolTip>
+                            <materialDesign:PackIcon VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                     Kind="PlusBold">
+                            </materialDesign:PackIcon>
+                        </Border>
+                    </Grid>
+                    <ScrollViewer MinWidth="50" HorizontalAlignment="Left"
+                                  VerticalScrollBarVisibility="Hidden">
+                        <StackPanel Orientation="Vertical" x:Name="CharactersMenuControl">
+
+                        </StackPanel>
+                    </ScrollViewer>
+
+
+                </DockPanel>
+            </Border>
+            <Grid x:Name="MainAreaContent">
+                <StackPanel Opacity="0.75" Orientation="Vertical" VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,7">
+                        <materialDesign:PackIcon Kind="Chat" Margin="0,0,8,0" VerticalAlignment="Center"></materialDesign:PackIcon>
+                        <TextBlock FontSize="16" FontWeight="Bold" Text="Select a chat to start!"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center">
+                        </TextBlock>
+                    </StackPanel>
+
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock Text="Or create a" Margin="0,0,7,0"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center">
+                        </TextBlock>
+                        <Button BorderThickness="0" Padding="7,0" FontWeight="Bold" VerticalAlignment="Center"
+                                Content="new character" Click="NewCharacter"
+                                Background="{DynamicResource BackgroundLight}">
+
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </DockPanel>
+        <Grid>
+            <materialDesign:DialogHost Background="Transparent" DialogBackground="Transparent"
+                                       OverlayBackground="Transparent" Name="PopupDialogs">
+                <materialDesign:DialogHost.DialogContent>
+                    <Grid x:Name="DialogArea">
+
+                    </Grid>
+                </materialDesign:DialogHost.DialogContent>
+            </materialDesign:DialogHost>
+        </Grid>
+    </Grid>
+</UserControl>
